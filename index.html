@@ -199,7 +199,6 @@
     function sendMessage() {
         const webhookURL = "YOUR_DISCORD_WEBHOOK_URL"; // Replace with your Discord Webhook URL
         const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
         const message = document.getElementById('message').value;
 
         if (!message.trim()) {
@@ -214,7 +213,6 @@
                     title: "New Message from Website",
                     fields: [
                         { name: "Name", value: name || "Not provided", inline: true },
-                        { name: "Email", value: email || "Not provided", inline: true },
                         { name: "Message", value: message }
                     ],
                     color: 5814783 // Optional, Discord color code
@@ -233,7 +231,6 @@
             if (response.ok) {
                 alert("Message sent successfully!");
                 document.getElementById('name').value = '';
-                document.getElementById('email').value = '';
                 document.getElementById('message').value = '';
             } else {
                 alert("Failed to send message. Check your webhook URL.");
