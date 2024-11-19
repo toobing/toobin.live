@@ -195,48 +195,57 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-		<script>
-function sendMessage() {
-    const webhookURL = "https://discord.com/api/webhooks/1308265658722553866/G3U8YNUwY7igKJr090J05bqCj19c1wwAjONHFVUTp7SLUgloaX33KSlc9OhRc42M3UGj";
-    const name = document.getElementById('name').value;
-    const message = document.getElementById('message').value;
+<script>
+    function sendMessage() {
+        const webhookURL = "YOUR_DISCORD_WEBHOOK_URL"; // Replace with your Discord Webhook URL
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
 
-    // Validate input
-    if (!message.trim()) {
-        alert("Please enter a message.");
-        return;
-    }
+        if (!message.trim()) {
+            alert("Please enter a message.");
+            return;
+        }
 
-    const payload = {
-        content: `**Name**: ${name || "Not provided"}\n**Message**: ${message}`
-    };
+        const payload = {
+            username: "Website Form", // Customize as needed
+            embeds: [
+                {
+                    title: "New Message from Website",
+                    fields: [
+                        { name: "Name", value: name || "Not provided", inline: true },
+                        { name: "Email", value: email || "Not provided", inline: true },
+                        { name: "Message", value: message }
+                    ],
+                    color: 5814783 // Optional, Discord color code
+                }
+            ]
+        };
 
-    // Fetch API to send data to Discord webhook
-    fetch(webhookURL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-    })
+        fetch(webhookURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        })
         .then(response => {
             if (response.ok) {
-                // Clear the form on successful submission
-                document.getElementById('name').value = '';
-                document.getElementById('message').value = '';
                 alert("Message sent successfully!");
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('message').value = '';
             } else {
-                alert("Failed to send message.");
+                alert("Failed to send message. Check your webhook URL.");
             }
         })
         .catch(error => {
-            alert("Error sending message: " + error);
+            console.error("Error sending message:", error);
+            alert("An error occurred. Please try again.");
         });
-}
-
-
-
+    }
 </script>
+
 
 	</body>
 </html>
