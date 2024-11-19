@@ -221,15 +221,19 @@ function sendMessage() {
     })
         .then(response => {
             if (response.ok) {
+                // Clear the form on successful submission
                 document.getElementById('name').value = '';
                 document.getElementById('message').value = '';
+                alert("Message sent successfully!");
             } else {
-
-	    }
+                alert("Failed to send message.");
+            }
         })
-
+        .catch(error => {
+            alert("Error sending message: " + error);
         });
 }
+
 
 
 </script>
