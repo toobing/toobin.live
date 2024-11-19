@@ -196,33 +196,22 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 		<script>
- function sendMessage() {
+function sendMessage() {
     const webhookURL = "https://discord.com/api/webhooks/1308265658722553866/G3U8YNUwY7igKJr090J05bqCj19c1wwAjONHFVUTp7SLUgloaX33KSlc9OhRc42M3UGj";
     const name = document.getElementById('name').value;
     const message = document.getElementById('message').value;
 
-    // Check for empty message
+    // Validate input
     if (!message.trim()) {
         alert("Please enter a message.");
         return;
     }
 
-    // Payload to send to Discord
     const payload = {
-        username: "Website Form", // Customize as needed
-        embeds: [
-            {
-                title: "New Message from Website",
-                fields: [
-                    { name: "Name", value: name || "Not provided", inline: true },
-                    { name: "Message", value: message }
-                ],
-                color: 5814783 // Optional, Discord color code
-            }
-        ]
+        content: `**Name**: ${name || "Not provided"}\n**Message**: ${message}`
     };
 
-    // Sending the payload to the Discord Webhook
+    // Fetch API to send data to Discord webhook
     fetch(webhookURL, {
         method: "POST",
         headers: {
@@ -233,7 +222,6 @@
         .then(response => {
             if (response.ok) {
                 alert("Message sent successfully!");
-                // Clear the form
                 document.getElementById('name').value = '';
                 document.getElementById('message').value = '';
             } else {
@@ -245,6 +233,7 @@
             alert("An error occurred. Please try again.");
         });
 }
+
 
 </script>
 
