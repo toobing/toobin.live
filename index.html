@@ -139,9 +139,6 @@
 												<input type="text" name="name" id="name" />
 											</div>
 											<div class="field half">
-												<label for="email">Email</label>
-												<input type="text" name="email" id="email" />
-											</div>
 											<div class="field">
 												<label for="message">Message</label>
 												<textarea name="message" id="message" rows="5"></textarea>
@@ -196,7 +193,6 @@
     function sendMessage() {
         const webhookURL = "https://discord.com/api/webhooks/1308265658722553866/G3U8YNUwY7igKJr090J05bqCj19c1wwAjONHFVUTp7SLUgloaX33KSlc9OhRc42M3UGj";
         const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
         const message = document.getElementById('message').value;
 
         if (!message.trim()) {
@@ -211,7 +207,6 @@
                     title: "New Message from Website",
                     fields: [
                         { name: "Name", value: name || "Not provided", inline: true },
-                        { name: "Email", value: email || "Not provided", inline: true },
                         { name: "Message", value: message }
                     ],
                     color: 5814783 // Optional, Discord color code
@@ -230,7 +225,6 @@
             if (response.ok) {
                 alert("Message sent successfully!");
                 document.getElementById('name').value = '';
-                document.getElementById('email').value = '';
                 document.getElementById('message').value = '';
             } else {
                 alert("Failed to send message. Check your webhook URL.");
